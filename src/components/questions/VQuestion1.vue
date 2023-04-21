@@ -11,12 +11,10 @@
 import VInput from "../UI/VInput.vue"
 
 export default {
-    name: "qu2",
     components: { VInput },
     props: {
         opts: {
             type: Object,
-            required: true,
         },
     },
 }

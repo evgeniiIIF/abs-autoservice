@@ -11,7 +11,13 @@
                         <div class="quest-cost__content">
                             <VQuest />
                         </div>
-                        <div class="quest-cost__image"></div>
+                        <div class="quest-cost__image ibg">
+                            <img
+                                src="@/assets/img/main/cost/cost_image.png"
+                                alt="cost"
+                            />
+                            <div class="quest-cost__blur"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -72,6 +78,8 @@ $bd: #2a2a2a;
 }
 
 .quest-cost {
+    position: relative;
+
     background: #2a2a2a;
     border-radius: 16px;
 
@@ -79,6 +87,28 @@ $bd: #2a2a2a;
     }
 
     &__image {
+        overflow: hidden;
+        width: 590px;
+        height: 100%;
+    }
+    &__blur {
+        position: absolute;
+        width: 227px;
+        height: 227px;
+        right: 389px;
+        top: -65px;
+        background: #00a19c;
+        filter: blur(150px);
+    }
+    .question {
+        &__title {
+            font-family: "Roboto";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 133%;
+            color: #ffffff;
+        }
     }
 }
 </style>
