@@ -1,16 +1,16 @@
 <template>
-    <footer class='footer'>
-        <div class="container">
+    <footer class="footer">
+        <!-- <div class="container">
             <div class="footer__body">
-                <div class="footer__top">
-                    <!-- <div class="footer__logo logo-footer">
+                <div class="footer__top"> -->
+        <!-- <div class="footer__logo logo-footer">
             <div class="logo-footer__stars">
               <img v-for="star in 4" :key="star" src="@/assets/img/logo/Star.svg" alt="star">
             </div>
             <img src="@/assets/img/logo/text-footer.svg" alt="hotel" class="logo-footer__text">
             <img src="@/assets/img/logo/STAVROPOL.png" alt="STAVROPOL" class="logo-footer__text">
           </div> -->
-                    <div class="footer__social social-footer">
+        <!-- <div class="footer__social social-footer">
                         <p class="social-footer__text">Мы в соц. сетях</p>
                         <div class="social-footer__items">
                             <div class="social-footer__item">
@@ -30,28 +30,27 @@
                     © Hotel Stavropol, 2020
                 </p>
             </div>
-        </div>
+        </div> -->
     </footer>
 </template>
 
 <script>
 export default {
-    name: 'vFooter'
+    name: "vFooter",
 }
 </script>
 
-<style lang='scss'>
-@import '@/assets/scss/mixins.scss';
-@import '@/assets/scss/smart-grid.scss';
+<style lang="scss">
+@import "@/assets/scss/mixins.scss";
+@import "@/assets/scss/smart-grid.scss";
 
 .footer {
-    background: #424343;
+    padding: 50px;
     border-radius: 20px 20px 0px 0px;
 
     &__body {
         padding-top: 48px;
         padding-bottom: 12px;
-
     }
 
     &__top {
@@ -73,20 +72,20 @@ export default {
         }
     }
 
-    &__social {}
+    &__social {
+    }
 
     &__bottom {
-        font-family: 'Lato';
+        font-family: "Lato";
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
         line-height: 20px;
         display: flex;
         align-items: center;
-        color: #FFFFFF;
+        color: #ffffff;
     }
 }
-
 
 .logo-footer {
     width: 109px;
@@ -97,27 +96,26 @@ export default {
 
     &__stars {
         @include mr(2px);
-
     }
 
-    &__text {}
+    &__text {
+    }
 }
 
 .social-footer {
-
     &__text {
         margin-bottom: 16px;
-        font-family: 'Lato';
+        font-family: "Lato";
         font-style: normal;
         font-weight: 400;
         font-size: 20px;
         line-height: 24px;
-        color: #FFFFFF;
+        color: #ffffff;
     }
 
     &__items {
         display: flex;
-        @include mr(20px)
+        @include mr(20px);
     }
 
     &__item {
@@ -126,8 +124,8 @@ export default {
         align-items: center;
         width: 52px;
         height: 52px;
-        background: #ACADA5;
-        border-radius: 16px
+        background: #acada5;
+        border-radius: 16px;
     }
 }
 </style>

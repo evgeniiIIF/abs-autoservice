@@ -5,6 +5,8 @@
     >
         <VServiceSection />
         <VProfitablySection />
+        <VFullscreenImage />
+        <VCostSection />
     </main>
 </template>
 
@@ -13,11 +15,14 @@ import computedHeaderHeight from "@/mixins/computedHeaderHeight"
 import VServiceSection from "../blocks/VServiceSection.vue"
 import mobileMixin from "@/mixins/mobileMode"
 import VProfitablySection from "../blocks/VProfitablySection.vue"
+import VFullscreenImage from "../blocks/VFullscreenImage.vue"
+import VQuest from "../UI-FC/VQuest.vue"
+import VCostSection from "../blocks/VCostSection.vue"
 
 export default {
     name: "vMain",
     mixins: [computedHeaderHeight, mobileMixin],
-    components: { VServiceSection, VProfitablySection },
+    components: { VServiceSection, VProfitablySection, VFullscreenImage, VQuest, VCostSection },
     watch: {
         isMobile() {
             this.setMarginTop()
@@ -44,5 +49,23 @@ export default {
 @import "@/assets/scss/smart-grid.scss";
 
 .main {
+    .service {
+        margin: 24px 0 40px 0;
+        @include md-block() {
+            margin: 0;
+        }
+    }
+    .profitably {
+        @include md-block() {
+            &__body {
+                border-bottom: 1px solid #414141;
+            }
+        }
+    }
+    .fullscreen-image {
+        @include lg-block() {
+            display: none;
+        }
+    }
 }
 </style>

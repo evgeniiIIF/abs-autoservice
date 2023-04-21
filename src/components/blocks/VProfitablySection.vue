@@ -6,26 +6,23 @@
                     <h2 class="profitably__title">С ABS-AUTO выгодно</h2>
                     <p class="profitably__text">Акции и спецпредложения компании</p>
                 </div>
-                <div class="profitably__cards">
-                    <div
-                        class="profitably__card card-profitably"
-                        v-for="item in profitablyCardItems"
-                        :key="item.title"
-                    >
-                        <div class="card-profitably__image">
-                            <img
-                                :src="item.img"
-                                :alt="item.title"
-                            />
-                        </div>
-                        <div class="card-profitably__texts">
-                            <h4 class="card-profitably__title">{{ item.title }}</h4>
-                            <p class="card-profitably__text">{{ item.text }}</p>
-                        </div>
-                        <div class="card-profitably__button">
-                            <VButton>{{ item.textButton }}</VButton>
+                <div
+                    class="profitably__cards"
+                    ref="jsProggressBar"
+                    @scroll="getProgressPercentsX"
+                >
+                    <div class="profitably__cards-body">
+                        <div
+                            class="profitably__card"
+                            v-for="opts in profitablyCardItems"
+                            :key="opts.title"
+                        >
+                            <VCardProfitably :opts="opts" />
                         </div>
                     </div>
+                </div>
+                <div class="profitably__progress">
+                    <VProgressBarX :percent="process" />
                 </div>
             </div>
         </div>
@@ -34,11 +31,15 @@
 
 <script>
 import VButton from "../UI/VButton.vue"
+import VProgressBarX from "../UI/VProgressBarX.vue"
+import VCardProfitably from "../cards/VCardProfitably.vue"
 
 export default {
-    components: { VButton },
+    components: { VButton, VCardProfitably, VProgressBarX },
     data() {
         return {
+            process: "0",
+
             profitablyCardItems: [
                 {
                     img: require("@/assets/img/main/profitable/image.png"),
@@ -78,6 +79,14 @@ export default {
                 },
             ],
         }
+    },
+    methods: {
+        getProgressPercentsX() {
+            const progressContainer = this.$refs.jsProggressBar
+            const scrollWidth = progressContainer.scrollWidth - progressContainer.offsetWidth
+            const scrollProgress = (progressContainer.scrollLeft / scrollWidth) * 100
+            this.process = scrollProgress + "%"
+        },
     },
 }
 </script>
@@ -120,60 +129,55 @@ $bd: #2a2a2a;
         line-height: 150%;
         color: #898989;
     }
-
     &__cards {
+        @include md-block() {
+            position: relative;
+            overflow-x: auto;
+            min-height: 265px;
+            margin: 0 -20px;
+            margin-bottom: 43px;
+        }
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        & {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+    }
+
+    &__cards-body {
         @include row-flex();
+
+        @include md-block() {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            margin: 0;
+            padding: 0 20px;
+
+            flex-wrap: nowrap;
+        }
     }
 
     &__card {
         @include col();
         @include size(4);
         @include size-lg(6);
-    }
-}
-
-.card-profitably {
-    display: flex;
-    flex-direction: column;
-    padding: 16px;
-    background: linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%);
-    border-radius: 16px;
-    border: 1px solid $bd;
-
-    &__image {
-        margin-bottom: 14px;
-        img {
-            width: 100%;
+        @include md-block() {
+            width: 240px;
         }
     }
 
-    &__texts {
-        flex: 1 1 auto;
-        min-height: 80px;
-        margin-bottom: 16px;
-    }
-
-    &__title {
-        margin-bottom: 8px;
-        font-family: "Roboto";
-        font-style: normal;
-        font-weight: 700;
-        font-size: 18px;
-        line-height: 133%;
-        color: #ffffff;
-    }
-    &__text {
-        font-family: "Roboto";
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 143%;
-        color: #898989;
-    }
-
-    &__button {
-        .button {
-            background: transparent;
+    &__cards-body {
+        @include md-block() {
+            & > * {
+                margin: 0;
+            }
+            @include mr(20px);
         }
     }
 }

@@ -1,3 +1,4 @@
+
 const mobileMixin = {
   data() {
     return {
@@ -18,17 +19,21 @@ const mobileMixin = {
       const body = document.querySelector("body");
       body.classList.add("_mobile");
     },
-    unsetClassMobilekBody() {
+    unsetClassMobileBody() {
       const body = document.querySelector("body");
       body.classList.remove("_mobile");
+      body.classList.remove("_lock");
+      
     },
     setClassForHeadMobileBody() {
       const body = document.querySelector("body");
       body.classList.add("_mobile--header");
     },
-    unsetClassForHeadMobilekBody() {
+    unsetClassForHeadMobileBody() {
       const body = document.querySelector("body");
       body.classList.remove("_mobile--header");
+      body.classList.remove("_lock");
+
     },
   },
   watch: {
@@ -36,14 +41,14 @@ const mobileMixin = {
       if (this.isMobile) {
         this.setClassMobileBody();
       } else {
-        this.unsetClassMobilekBody();
+        this.unsetClassMobileBody();
       }
     },
     isMobileForHead() {
         if (this.isMobileForHead) {
           this.setClassForHeadMobileBody();
         } else {
-          this.unsetClassForHeadMobilekBody();
+          this.unsetClassForHeadMobileBody();
         }
       },
   },

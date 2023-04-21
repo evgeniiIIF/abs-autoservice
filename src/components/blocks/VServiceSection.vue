@@ -61,8 +61,6 @@ $bg: rgba(17, 18, 18, 0.8);
 $bd: #2a2a2a;
 
 .service {
-    margin: 24px 0 40px 0;
-
     &__body {
         padding: 80px 80px 144px;
         border-radius: 24px;
