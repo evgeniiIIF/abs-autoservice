@@ -1,11 +1,10 @@
 <template>
     <div class="quest">
-        <div class="quest__progress">Progress</div>
+        <div class="quest__progress"></div>
         <div class="quest__question">
             <component
                 :is="currentQuestionOpts.componentIs"
-                :opts="currentQuestionOpts"
-            ></component>
+                :opts="currentQuestionOpts"></component>
         </div>
         <div class="quest__button">
             <VButton @click="nextQuestion">button</VButton>
@@ -120,6 +119,7 @@ export default {
 <style lang="scss">
 @import "@/assets/scss/mixins.scss";
 @import "@/assets/scss/smart-grid.scss";
+
 .quest {
     color: #fff;
     font-size: 32px;
