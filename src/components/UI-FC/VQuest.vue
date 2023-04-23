@@ -1,6 +1,17 @@
 <template>
     <div class="quest">
-        <div class="quest__progress"></div>
+        <div class="quest__progress progress-quest">
+            <ul class="progress-quest__line">
+                <li class="progress-quest__item item-progress-quest"
+                    v-for="(item, index) in questions.length" :key="index"
+                    :class="(item <= currentQuestionNumber ? 'item-progress-quest--active' : '')">
+                    <div class="item-progress-quest__line" v-if="item !== 1">
+                        <div class="item-progress-quest__line-done"></div>
+                    </div>
+                    <div class="item-progress-quest__circle"></div>
+                </li>
+            </ul>
+        </div>
         <div class="quest__question">
             <component
                 :is="currentQuestionOpts.componentIs"
@@ -72,6 +83,32 @@ export default {
                         placeholder: "Опишите проблему",
                     },
                 },
+                {
+                    componentIs: "VQuestion2",
+                    title: "2. Опишите вашу проблему / что нужно сделать?",
+                    inputOpts: {
+                        textarea: true,
+                        cols: 30,
+                        rows: 5,
+                        label: "Комментарий",
+                        type: "textarea",
+                        name: "problem",
+                        placeholder: "Опишите проблему",
+                    },
+                },
+                {
+                    componentIs: "VQuestion2",
+                    title: "2. Опишите вашу проблему / что нужно сделать?",
+                    inputOpts: {
+                        textarea: true,
+                        cols: 30,
+                        rows: 5,
+                        label: "Комментарий",
+                        type: "textarea",
+                        name: "problem",
+                        placeholder: "Опишите проблему",
+                    },
+                },
             ],
         }
     },
@@ -123,6 +160,61 @@ export default {
 .quest {
     color: #fff;
     font-size: 32px;
+}
+
+.quest {
+
+    &__progress {}
+}
+
+.progress-quest {
+
+    &__line {
+        display: flex;
+        align-items: center;
+    }
+
+    &__item {}
+}
+
+.item-progress-quest {
+    display: flex;
+    align-items: center;
+
+    &__circle {
+        width: 8px;
+        height: 8px;
+        background: #414141;
+    }
+
+    &__line {
+        flex: 1 1 auto;
+        min-width: 20px;
+        height: 2px;
+        background: #414141;
+
+        &__line-done {
+            width: 0;
+            background: green;
+        }
+    }
+}
+
+.item-progress-quest--active {
+
+    .item-progress-quest__circle {
+        background: green;
+        transition: all 0.05s ease 0.3s;
+
+    }
+
+    .item-progress-quest__line-done {
+        height: 100%;
+        width: 100%;
+        transition: all .3s ease 0s;
+        background: green;
+    }
+
 }
 </style>
 
