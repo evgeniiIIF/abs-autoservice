@@ -1,35 +1,48 @@
 <template>
-  <form class="form" action="#">
-    <h5 class="form__title" v-if="formData.title">{{ formData.title }}</h5>
-    <div class="form__body">
-      <div class="form__input" v-for="item in formData.inputs" :key="item.name">
-        <inputInLabel :opts="item" />
-      </div>
-      <div class="form__button" @click="$emit('onShowDialog')">
-        <baseButton>Забронировать</baseButton>
-      </div>
-    </div>
-  </form>
+    <form
+        class="form"
+        action="#"
+    >
+        <h5
+            class="form__title"
+            v-if="formData.title"
+        >
+            {{ formData.title }}
+        </h5>
+        <div class="form__body">
+            <div
+                class="form__input"
+                v-for="item in formData.inputs"
+                :key="item.name"
+            >
+                <inputInLabel :opts="item" />
+            </div>
+            <div
+                class="form__button"
+                @click="$emit('onShowDialog')"
+            >
+                <baseButton>Забронировать</baseButton>
+            </div>
+        </div>
+    </form>
 </template>
 
 <script>
-
-import inputInLabel from '../UI/input-in-label.vue';
-import baseButton from '../UI/base-button.vue';
-
+import inputInLabel from "../UI/input-in-label.vue"
+import baseButton from "../UI/base-button.vue"
 
 export default {
-  name: 'VForm',
-  components: {
-    inputInLabel,
-    baseButton,
-  },
-  props: {
-    formData: {
-      type: Object,
-      required: true
-    }
-  }
+    name: "VForm",
+    components: {
+        inputInLabel,
+        baseButton,
+    },
+    props: {
+        formData: {
+            type: Object,
+            required: true,
+        },
+    },
 }
 // exampleFormData : {
 //   title: 'Узнайте свободные даты и забронируйте зал',
@@ -40,4 +53,4 @@ export default {
 // }
 </script>
 
-<style lang='scss'></style>
+<style lang="scss"></style>

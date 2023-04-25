@@ -100,8 +100,7 @@ $bd: #2a2a2a;
 
 .profitably {
     &__body {
-        padding: 60px 80px;
-        padding-right: 70px;
+        padding: 60px 0;
         @include xl-block() {
             padding: 40px 0;
         }

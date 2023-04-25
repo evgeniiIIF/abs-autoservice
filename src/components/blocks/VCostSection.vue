@@ -11,13 +11,23 @@
                         <div class="quest-cost__content">
                             <VQuest />
                         </div>
-                        <div class="quest-cost__image ibg">
-                            <img
-                                src="@/assets/img/main/cost/cost_image.png"
-                                alt="cost"
-                            />
-                            <div class="quest-cost__blur"></div>
+                        <div class="quest-cost__image">
+                            <picture>
+                                <source
+                                    media="(min-width: 424px)"
+                                    srcset="@/assets/img/main/cost/cost_image.png"
+                                />
+                                <source
+                                    media="(max-width: 425px)"
+                                    srcset="@/assets/img/main/cost/cost_image_small.png"
+                                />
+                                <img
+                                    src="@/assets/img/main/cost/cost_image.png"
+                                    alt="image"
+                                />
+                            </picture>
                         </div>
+                        <div class="quest-cost__blur"></div>
                     </div>
                 </div>
             </div>
@@ -49,28 +59,34 @@ $bd: #2a2a2a;
 
 .cost {
     &__body {
+        padding: 60px 0px 60px 0px;
+        @include lg-block() {
+            padding: 40px 0;
+        }
     }
 
     &__texts {
+        max-width: 668px;
         margin-bottom: 40px;
     }
 
     &__title {
+        margin-bottom: 8px;
         font-family: "Roboto";
         font-style: normal;
         font-weight: 700;
-        font-size: 32px;
         line-height: 138%;
         color: #ffffff;
+        @include af(32, 20);
     }
 
     &__text {
         font-family: "Roboto";
         font-style: normal;
         font-weight: 400;
-        font-size: 16px;
         line-height: 150%;
         color: #898989;
+        @include af(16, 14);
     }
 
     &__quest {
@@ -79,35 +95,75 @@ $bd: #2a2a2a;
 
 .quest-cost {
     position: relative;
-
-    background: #2a2a2a;
+    display: flex;
     border-radius: 16px;
+    overflow: hidden;
+    background: #2a2a2a;
+    @include lg-block() {
+        overflow: visible;
+        flex-direction: column;
+    }
 
     &__content {
+        flex: 0 0 50.833333333%;
+        @include lg-block() {
+            position: relative;
+            z-index: 1;
+        }
     }
 
     &__image {
-        overflow: hidden;
-        width: 590px;
-        height: 100%;
+        position: relative;
+        flex: 1 1 auto;
+        @include lg-block() {
+            margin-top: -160px;
+            flex: 1 1 358px;
+        }
+
+        @include md-block() {
+            margin-top: 0;
+            flex: 1 1 auto;
+            padding-top: 54.596838%;
+        }
+
+        img {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            max-width: 100%;
+            z-index: 1;
+            transform: translateY(-50%);
+            @include md-block() {
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transform: translateY(0);
+            }
+        }
     }
     &__blur {
         position: absolute;
         width: 227px;
         height: 227px;
-        right: 389px;
+        right: 0;
         top: -65px;
         background: #00a19c;
         filter: blur(150px);
-    }
-    .question {
-        &__title {
-            font-family: "Roboto";
-            font-style: normal;
-            font-weight: 700;
-            font-size: 24px;
-            line-height: 133%;
-            color: #ffffff;
+
+        @include lg-block() {
+            position: absolute;
+            width: 255px;
+            height: 255px;
+            right: -170px;
+            top: -200px;
+            background: #00a19c;
+            opacity: 0.34;
+            filter: blur(70px);
+        }
+        @include sm-block() {
+            top: -250px;
         }
     }
 }

@@ -1,10 +1,5 @@
 <template>
-    <div class="fullscreen-image ibg">
-        <img
-            src="@/assets/img/main/fullscreen-image/fullscreen_image.jpg"
-            alt=""
-        />
-    </div>
+    <div class="fullscreen-image ibg"></div>
 </template>
 <script>
 export default {}
@@ -13,6 +8,11 @@ export default {}
 @import "@/assets/scss/smart-grid.scss";
 @import "@/assets/scss/mixins.scss";
 .fullscreen-image {
+    background-image: url("@/assets/img/main/fullscreen-image/fullscreen_image1.jpg");
+    width: 100%;
     padding-top: 20.8333333%;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 </style>

@@ -25,5 +25,22 @@ export default {
 @import "@/assets/scss/smart-grid.scss";
 
 .question {
+    &__title {
+        margin-bottom: 24px;
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 700;
+        line-height: 133%;
+        color: #ffffff;
+        @include af(24, 18);
+        @include md-block() {
+            margin-bottom: 16px;
+        }
+    }
+
+    &__input {
+        max-width: 300px;
+        margin-bottom: 64px;
+    }
 }
 </style>

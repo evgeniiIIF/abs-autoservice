@@ -1,6 +1,6 @@
 <template>
     <section class="service">
-        <div class="container">
+        <div class="container service__container">
             <div class="service__body ibg">
                 <div class="service__image">
                     <picture>
@@ -72,6 +72,10 @@ $bd: #2a2a2a;
             margin: 0 -20px;
             padding: 24px 20px 40px 20px;
         }
+    }
+
+    & &__container {
+        max-width: 1350px;
     }
 
     &__image {

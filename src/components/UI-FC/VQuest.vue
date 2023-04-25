@@ -1,11 +1,18 @@
 <template>
     <div class="quest">
         <div class="quest__progress progress-quest">
-            <ul class="progress-quest__line">
-                <li class="progress-quest__item item-progress-quest"
-                    v-for="(item, index) in questions.length" :key="index"
-                    :class="(item <= currentQuestionNumber ? 'item-progress-quest--active' : '')">
-                    <div class="item-progress-quest__line" v-if="item !== 1">
+            <p class="progress-quest__text">ШАГ {{ currentQuestionNumber }}</p>
+            <ul class="progress-quest__list">
+                <li
+                    class="progress-quest__item item-progress-quest"
+                    v-for="(item, index) in questions.length"
+                    :key="index"
+                    :class="item <= currentQuestionNumber ? 'item-progress-quest--active' : ''"
+                >
+                    <div
+                        class="item-progress-quest__line"
+                        v-if="item !== 1"
+                    >
                         <div class="item-progress-quest__line-done"></div>
                     </div>
                     <div class="item-progress-quest__circle"></div>
@@ -13,12 +20,29 @@
             </ul>
         </div>
         <div class="quest__question">
-            <component
-                :is="currentQuestionOpts.componentIs"
-                :opts="currentQuestionOpts"></component>
+            <Transition
+                name="fade-in"
+                mode="out-in"
+            >
+                <component
+                    :is="currentQuestionOpts.componentIs"
+                    :opts="currentQuestionOpts"
+                >
+                </component>
+            </Transition>
         </div>
-        <div class="quest__button">
-            <VButton @click="nextQuestion">button</VButton>
+        <div
+            class="quest__button button-quest"
+            v-if="currentQuestionNumber < questions.length"
+        >
+            <VButton @click="nextQuestion">
+                <span class="button-quest__text"> Далее </span>
+                <img
+                    src="@/assets/img/main/cost/Chevron_Right.svg"
+                    alt="arrow"
+                    class="button-quest__arrow"
+                />
+            </VButton>
         </div>
     </div>
 </template>
@@ -29,6 +53,8 @@ import mobileMixin from "@/mixins/mobileMode"
 import VButton from "../UI/VButton.vue"
 import VQuestion1 from "@/components/questions/VQuestion1.vue"
 import VQuestion2 from "@/components/questions/VQuestion2.vue"
+import VQuestion3 from "@/components/questions/VQuestion3.vue"
+import VQuestion4 from "@/components/questions/VQuestion4.vue"
 
 export default {
     name: "quest",
@@ -36,6 +62,8 @@ export default {
         VButton,
         VQuestion1,
         VQuestion2,
+        VQuestion3,
+        VQuestion4,
     },
     // props: {
     //     questionsCountAll: {
@@ -62,6 +90,7 @@ export default {
             questions: [
                 {
                     componentIs: "VQuestion1",
+                    componentNumber: 1,
                     title: "1. Заполните информацию об автомобиле",
                     inputOpts: {
                         label: "Марка и модель авто",
@@ -72,42 +101,45 @@ export default {
                 },
                 {
                     componentIs: "VQuestion2",
+                    componentNumber: 2,
+
                     title: "2. Опишите вашу проблему / что нужно сделать?",
                     inputOpts: {
                         textarea: true,
-                        cols: 30,
-                        rows: 5,
+
                         label: "Комментарий",
-                        type: "textarea",
+                        type: "text",
                         name: "problem",
                         placeholder: "Опишите проблему",
                     },
                 },
                 {
-                    componentIs: "VQuestion2",
-                    title: "2. Опишите вашу проблему / что нужно сделать?",
+                    componentIs: "VQuestion3",
+                    componentNumber: 3,
+
+                    title: "3. Оставьте ваши контактные данные",
                     inputOpts: {
-                        textarea: true,
-                        cols: 30,
-                        rows: 5,
-                        label: "Комментарий",
-                        type: "textarea",
-                        name: "problem",
-                        placeholder: "Опишите проблему",
+                        inputName: {
+                            type: "text",
+                            name: "clientName",
+                            label: "Имя",
+                            placeholder: "Введите имя",
+                        },
+                        inputTel: {
+                            type: "tel",
+                            name: "phone",
+                            label: "Телефон",
+                            placeholder: "+7 (___) ___-__-__",
+                        },
                     },
                 },
                 {
-                    componentIs: "VQuestion2",
-                    title: "2. Опишите вашу проблему / что нужно сделать?",
-                    inputOpts: {
-                        textarea: true,
-                        cols: 30,
-                        rows: 5,
-                        label: "Комментарий",
-                        type: "textarea",
-                        name: "problem",
-                        placeholder: "Опишите проблему",
-                    },
+                    componentIs: "VQuestion4",
+                    componentNumber: 4,
+
+                    titleTop: "Спасибо!",
+                    titleBottom: "Ваша заявка отправлена успешно.!",
+                    text: "Специалист свяжется с Вами в ближайшее время.",
                 },
             ],
         }
@@ -158,23 +190,51 @@ export default {
 @import "@/assets/scss/smart-grid.scss";
 
 .quest {
-    color: #fff;
-    font-size: 32px;
-}
+    display: flex;
+    flex-direction: column;
+    padding: 32px 0px 40px 40px;
+    min-height: 375px;
 
-.quest {
+    @include md-block() {
+        min-height: 310px;
+        padding: 24px 20px 0px 20px;
+        margin-bottom: 40px;
+    }
 
-    &__progress {}
+    &__progress {
+        margin-bottom: 40px;
+        @include md-block() {
+            margin-bottom: 24px;
+        }
+    }
+    &__question {
+        flex: 1 1 auto;
+    }
+
+    &__button {
+    }
 }
 
 .progress-quest {
+    display: flex;
+    align-items: center;
 
-    &__line {
+    &__text {
+        margin-right: 24px;
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+        color: #ffffff;
+    }
+    &__list {
         display: flex;
         align-items: center;
     }
 
-    &__item {}
+    &__item {
+    }
 }
 
 .item-progress-quest {
@@ -185,6 +245,7 @@ export default {
         width: 8px;
         height: 8px;
         background: #414141;
+        border-radius: 50%;
     }
 
     &__line {
@@ -201,20 +262,38 @@ export default {
 }
 
 .item-progress-quest--active {
-
     .item-progress-quest__circle {
-        background: green;
-        transition: all 0.05s ease 0.3s;
-
+        background: #00a19c;
+        transition: all 0.01s ease 0.19s;
     }
 
     .item-progress-quest__line-done {
         height: 100%;
         width: 100%;
-        transition: all .3s ease 0s;
-        background: green;
+        transition: all 0.2s ease 0s;
+        background: #00a19c;
+    }
+}
+
+.button-quest {
+    .button {
+        padding: 12px 12px 12px 24px;
     }
 
+    &__text {
+        margin-right: 8px;
+    }
+
+    &__arrow {
+    }
+}
+.fade-in-enter-from {
+    transform: translate(50px);
+    opacity: 0;
+}
+
+.fade-in-enter-active {
+    transition: all 0.3s ease 0s;
 }
 </style>
 
