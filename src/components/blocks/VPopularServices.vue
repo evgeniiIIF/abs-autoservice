@@ -1,5 +1,5 @@
 <template>
-    <div class="popular-services">
+    <section class="popular-services">
         <div class="container">
             <div class="popular-services__body">
                 <h3 class="popular-services__title">Популярные услуги в ABS-AUTO</h3>
@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </template>
 <script>
 import VButton from "../UI/VButton.vue"
@@ -103,7 +103,13 @@ export default {
 @import "@/assets/scss/mixins.scss";
 
 .popular-services {
+    background: linear-gradient(180deg, #2a2a2a 0%, rgba(17, 18, 18, 0) 100%);
+
     &__body {
+        padding: 60px 0 40px;
+        @include md-block() {
+            padding: 40px 0 20px;
+        }
     }
 
     &__title {

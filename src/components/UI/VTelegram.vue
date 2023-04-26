@@ -4,7 +4,10 @@
         target="_blank"
         :href="`https://t.me/${telegramUserName}`"
     >
-        <slot></slot>
+        <img
+            src="@/assets/img/header/social/Telegram.svg"
+            alt="tg"
+        />
     </a>
 </template>
 
@@ -13,7 +16,7 @@ export default {
     props: {
         telegramUserName: {
             type: String,
-            required: true,
+            // required: true,
         },
     },
 }

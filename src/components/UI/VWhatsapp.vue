@@ -4,7 +4,10 @@
         target="_blank"
         :href="`https://wa.me/${whatsappNumber}`"
     >
-        <slot></slot>
+        <img
+            src="@/assets/img/header/social/Whatsapp.svg"
+            alt="wh"
+        />
     </a>
 </template>
 
@@ -13,7 +16,7 @@ export default {
     props: {
         whatsappNumber: {
             type: String,
-            required: true,
+            // required: true,
         },
     },
 }

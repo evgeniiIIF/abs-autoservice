@@ -8,6 +8,7 @@
         <VFullscreenImage />
         <VCostSection />
         <VPopularServices />
+        <VConsultSection />
     </main>
 </template>
 
@@ -20,11 +21,12 @@ import VFullscreenImage from "../blocks/VFullscreenImage.vue"
 import VQuest from "../UI-FC/VQuest.vue"
 import VCostSection from "../blocks/VCostSection.vue"
 import VPopularServices from "../blocks/VPopularServices.vue"
+import VConsultSection from "../blocks/VConsultSection.vue"
 
 export default {
     name: "vMain",
     mixins: [computedHeaderHeight, mobileMixin],
-    components: { VServiceSection, VProfitablySection, VFullscreenImage, VQuest, VCostSection, VPopularServices },
+    components: { VServiceSection, VProfitablySection, VFullscreenImage, VQuest, VCostSection, VPopularServices, VConsultSection },
     watch: {
         isMobile() {
             this.setMarginTop()

@@ -48,6 +48,7 @@ export default {
 .input {
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     &__label {
         margin-bottom: 5px;

@@ -12,30 +12,30 @@
         <div class="form__body">
             <div
                 class="form__input"
-                v-for="item in formData.inputs"
-                :key="item.name"
+                v-for="inputData in formData.inputs"
+                :key="inputData.name"
             >
-                <inputInLabel :opts="item" />
+                <VInput :opts="inputData" />
             </div>
-            <div
-                class="form__button"
-                @click="$emit('onShowDialog')"
-            >
-                <baseButton>Забронировать</baseButton>
+            <div class="form__button">
+                <VButton>
+                    {{ formData.buttonText }}
+                </VButton>
             </div>
         </div>
     </form>
 </template>
 
 <script>
-import inputInLabel from "../UI/input-in-label.vue"
 import baseButton from "../UI/base-button.vue"
+import VButton from "../UI/VButton.vue"
+import VInput from "../UI/VInput.vue"
 
 export default {
     name: "VForm",
     components: {
-        inputInLabel,
-        baseButton,
+        VInput,
+        VButton,
     },
     props: {
         formData: {

@@ -26,20 +26,10 @@
                     </div>
                     <div class="contacts-header__social">
                         <div class="contacts-header__socal-item button-header">
-                            <VWhatsapp>
-                                <img
-                                    src="@/assets/img/header/social/Whatsapp.svg"
-                                    alt="wh"
-                                />
-                            </VWhatsapp>
+                            <VWhatsapp whatsappNumber="+79887516613" />
                         </div>
                         <div class="contacts-header__socal-item button-header">
-                            <VTelegram>
-                                <img
-                                    src="@/assets/img/header/social/Telegram.svg"
-                                    alt="tg"
-                                />
-                            </VTelegram>
+                            <VTelegram telegramUserName="https://t.me/E888VG" />
                         </div>
                     </div>
                 </div>
