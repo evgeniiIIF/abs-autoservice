@@ -1,5 +1,5 @@
 <template>
-    <div class="fullscreen-image1 ibg"></div>
+    <div class="fullscreen-image2 ibg"></div>
 </template>
 <script>
 export default {}
@@ -7,8 +7,8 @@ export default {}
 <style lang="scss">
 @import "@/assets/scss/smart-grid.scss";
 @import "@/assets/scss/mixins.scss";
-.fullscreen-image1 {
-    background-image: url("@/assets/img/main/fullscreen-image/fullscreen_image1.jpg");
+.fullscreen-image2 {
+    background-image: url("@/assets/img/main/fullscreen-image2/fullscreen_image2.jpg");
     width: 100%;
     padding-top: 20.8333333%;
     background-size: cover;
