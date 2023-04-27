@@ -3,7 +3,8 @@ const mobileMixin = {
   data() {
     return {
       isMobile: false,
-      isMobileForHead: false
+      isMobileForHead: false,
+			md: false,
     };
   },
   mounted() {
@@ -14,6 +15,7 @@ const mobileMixin = {
     handleResize() {
       this.isMobile = window.innerWidth < 992;
       this.isMobileForHead = window.innerWidth < 1290;
+      this.md = window.innerWidth < 768;
     },
     setClassMobileBody() {
       const body = document.querySelector("body");

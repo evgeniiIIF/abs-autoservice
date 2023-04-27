@@ -77,4 +77,19 @@ export default {
 <style lang="scss">
 @import "@/assets/scss/smart-grid.scss";
 @import "@/assets/scss/mixins.scss";
+
+.reviews {
+
+	&__body {
+		padding: 60px 0 40px;
+
+		@include md-block() {
+			padding: 40px 0;
+		}
+	}
+
+	&__slider {}
+}
+
+.container {}
 </style>

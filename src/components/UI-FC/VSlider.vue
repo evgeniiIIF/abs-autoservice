@@ -22,6 +22,7 @@
 				</div>
 			</div>
 			<div class="slider__line"
+					 :class="md ? 'js-progress-container' : ''"
 					 :style="currentOffset">
 				<div ref="slide"
 						 class="slider__slide slide-slider"
@@ -41,11 +42,16 @@
 				</div>
 			</div>
 			<div class="slider__progress progress-slider">
-				<div class="progress-slider__item"
-						 v-for="(item, index) in sliderOpts.slides.length"
-						 :key="index"
-						 :class="index === currentIndex ? 'progress-slider__item--active' : ''">
-					<span class="progress-slider__item-active-line"></span>
+				<div class="progress-slider--desctop">
+					<div class="progress-slider__item"
+							 v-for="(item, index) in sliderOpts.slides.length"
+							 :key="index"
+							 :class="index === currentIndex ? 'progress-slider__item--active' : ''">
+						<span class="progress-slider__item-active-line"></span>
+					</div>
+				</div>
+				<div class="progress-slider--mobile">
+					<VProgressBarX progressContainerSelector=".js-progress-container" />
 				</div>
 			</div>
 			<div class="slider__bottom"
@@ -68,10 +74,13 @@
 </template>
 
 <script>
+import mobileMixin from '@/mixins/mobileMode'
 import VCardRewievs from '@/components/cards/VCardRewievs.vue'
 import { nextTick } from 'vue';
+import VProgressBarX from '../UI/VProgressBarX.vue';
 
 export default {
+	mixins: [mobileMixin],
 	props: {
 		sliderOpts: {
 			type: Object,
@@ -79,7 +88,8 @@ export default {
 		}
 	},
 	components: {
-		VCardRewievs
+		VCardRewievs,
+		VProgressBarX
 	},
 	data() {
 		return {
@@ -169,12 +179,15 @@ export default {
 	},
 
 	mounted() {
+		// if (!this.md) {
+
 		const intervalSlide = setInterval(() => {
 			console.log(this.currentIndex);
 			this.goToNextSlide()
-		}, 3000);
+		}, 10000);
 	}
-};
+}
+// };
 </script>
 
 <style lang="scss">
@@ -264,9 +277,16 @@ export default {
 }
 
 .progress-slider {
-	display: flex;
-	justify-content: center;
-	@include mr(4px);
+	&--desctop {
+		display: flex;
+		justify-content: center;
+		@include mr(4px);
+		margin-top: 32px;
+
+		@include md-block() {
+			display: none;
+		}
+	}
 
 	&__item {
 		width: 23px;
@@ -278,7 +298,7 @@ export default {
 		&--active {
 			& .progress-slider__item-active-line {
 				width: 100%;
-				transition: all 3s ease 0.3s;
+				transition: all 10s ease 0.3s;
 			}
 		}
 
