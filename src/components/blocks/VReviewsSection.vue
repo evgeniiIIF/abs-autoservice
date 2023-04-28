@@ -117,6 +117,10 @@ export default {
 
 		@include mr(20px);
 		@include hideScroll();
+
+		@include md-block() {
+			margin-right: -20px;
+		}
 	}
 
 	&__card {}

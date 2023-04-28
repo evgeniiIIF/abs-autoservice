@@ -107,7 +107,7 @@ export default { components: { VTel, VEmail, VButton, VMapUIFC } }
 
 		@include sm-block() {
 			margin: 0 -20px;
-			padding-top: 62.5%;
+			padding-top: 71.43%;
 		}
 	}
 }

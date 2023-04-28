@@ -127,6 +127,12 @@ export default {
 		min-width: 240px;
 	}
 
+	@include md-block {
+		min-width: auto;
+		width: 240px;
+		padding: 16px;
+	}
+
 	.card-rewievs__top {
 		align-items: stretch;
 	}
@@ -172,6 +178,11 @@ export default {
 	background: linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%);
 	border-radius: 16px;
 	padding: 16px 22px 40px 16px;
+
+	@include md-block() {
+		padding: 0px;
+		max-width: 240px;
+	}
 
 	&__image {
 		flex: 0 0 72px;
