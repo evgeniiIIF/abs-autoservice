@@ -126,11 +126,11 @@ $bd: #2a2a2a;
 			margin-bottom: 43px;
 		}
 
+		/* Hide scrollbar for IE, Edge and Firefox */
 		&::-webkit-scrollbar {
 			display: none;
 		}
 
-		/* Hide scrollbar for IE, Edge and Firefox */
 		& {
 			scrollbar-width: none;
 			-ms-overflow-style: none;

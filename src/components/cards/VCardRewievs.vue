@@ -112,6 +112,8 @@ export default {
 @import "@/assets/scss/smart-grid.scss";
 
 .card-rewievs--desctop {
+	display: flex;
+
 	@include lg-block {
 		display: none;
 	}
@@ -137,6 +139,7 @@ export default {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		align-items: flex-end;
 
 		.button {
 			padding: 8px 16px;
@@ -166,12 +169,12 @@ export default {
 }
 
 .card-rewievs {
-	display: flex;
 	background: linear-gradient(180deg, rgba(42, 42, 42, 0) 0%, rgba(42, 42, 42, 0.4) 100%);
 	border-radius: 16px;
 	padding: 16px 22px 40px 16px;
 
 	&__image {
+		flex: 0 0 72px;
 		width: 72px;
 		margin-right: 24px;
 

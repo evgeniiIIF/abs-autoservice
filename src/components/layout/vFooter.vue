@@ -1,42 +1,50 @@
 <template>
-    <footer class="footer">
-        <!-- <div class="container">
-            <div class="footer__body">
-                <div class="footer__top"> -->
-        <!-- <div class="footer__logo logo-footer">
-            <div class="logo-footer__stars">
-              <img v-for="star in 4" :key="star" src="@/assets/img/logo/Star.svg" alt="star">
-            </div>
-            <img src="@/assets/img/logo/text-footer.svg" alt="hotel" class="logo-footer__text">
-            <img src="@/assets/img/logo/STAVROPOL.png" alt="STAVROPOL" class="logo-footer__text">
-          </div> -->
-        <!-- <div class="footer__social social-footer">
-                        <p class="social-footer__text">Мы в соц. сетях</p>
-                        <div class="social-footer__items">
-                            <div class="social-footer__item">
-                                <img src="@/assets/img/footer/FB.svg" alt="fb">
-                            </div>
-                            <div class="social-footer__item">
-                                <img src="@/assets/img/footer/WhatsApp.svg" alt="w">
-                            </div>
-                            <div class="social-footer__item">
-                                <img src="@/assets/img/footer/VK.svg" alt="vk">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <p class="footer__bottom">
-                    © Hotel Stavropol, 2020
-                </p>
-            </div>
-        </div> -->
-    </footer>
+	<footer class="footer">
+		<div class="container">
+			<div class="footer__body">
+				<div class="footer__top top-footer">
+					<div class="top-footer__left">
+						<div class="top-footer__logo">
+							<img src="@/assets/img/header/logo/Logo.svg"
+									 alt="logo">
+						</div>
+						<div class="top-footer__nav">
+							<VNav :menuItems="menuItems" />
+						</div>
+					</div>
+					<div class="top-footer__social">
+						<VTelegram />
+						<VWhatsapp />
+					</div>
+				</div>
+				<div class="footer__copy copy-footer">
+					<p class="copy-footer__text copy-footer__left">© ABS-autoservice, 2023</p>
+					<p class="copy-footer__text copy-footer__right">Политика конфиденциальности</p>
+				</div>
+			</div>
+		</div>
+	</footer>
 </template>
 
 <script>
+import VLogo from '../UI/VLogo.vue';
+import VNav from '../UI/VNav.vue';
+import VTelegram from '../UI/VTelegram.vue';
+import VWhatsapp from '../UI/VWhatsapp.vue';
+
 export default {
-    name: "vFooter",
+	name: "vFooter",
+	components: { VLogo, VNav, VTelegram, VWhatsapp },
+	data() {
+		return {
+			menuItems: [
+				'Акции',
+				'Расчет стоимости',
+				'Услуги',
+				'Бонусная программа',
+			]
+		}
+	}
 }
 </script>
 
@@ -45,87 +53,144 @@ export default {
 @import "@/assets/scss/smart-grid.scss";
 
 .footer {
-    padding: 50px;
-    border-radius: 20px 20px 0px 0px;
 
-    &__body {
-        padding-top: 48px;
-        padding-bottom: 12px;
-    }
+	background: linear-gradient(180deg, #2A2A2A 0%, rgba(17, 18, 18, 0) 20%);
 
-    &__top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 41px;
+	&__body {}
 
-        @include to(600px) {
-            flex-direction: column;
-            align-items: start;
-            margin-bottom: 60px;
-        }
-    }
+	&__top {
+		padding: 60px 0;
+		border-bottom: 1px solid #2A2A2A;
 
-    &__logo {
-        @include to(600px) {
-            margin-bottom: 40px;
-        }
-    }
+		@include lg-block() {
+			padding: 40px 0 20px;
+		}
+	}
 
-    &__social {
-    }
-
-    &__bottom {
-        font-family: "Lato";
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 20px;
-        display: flex;
-        align-items: center;
-        color: #ffffff;
-    }
+	&__copy {
+		padding: 16px 0;
+	}
 }
 
-.logo-footer {
-    width: 109px;
-    display: flex;
-    flex-direction: column;
 
-    @include mb(6px);
+.top-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 
-    &__stars {
-        @include mr(2px);
-    }
+	@include lg-block() {
+		width: 100%;
 
-    &__text {
-    }
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+
+	&__left {
+		display: flex;
+		align-items: center;
+
+		@include lg-block() {
+			width: 100%;
+			flex-direction: column;
+			margin-bottom: 20px;
+			align-items: flex-start;
+
+		}
+
+	}
+
+	&__logo {
+		margin-right: 93px;
+
+		@include lg-block() {
+			margin-right: 0;
+			margin-bottom: 40px;
+		}
+	}
+
+	&__nav {
+		flex: 1 1 auto;
+
+		@include lg-block() {
+			width: 100%;
+		}
+
+		.nav {
+			&__list {
+
+				display: flex;
+				@include mr(24px);
+
+				@include lg-block() {
+					flex-direction: column;
+					@include mr(0px);
+				}
+			}
+
+			&__item {
+				@include lg-block() {
+					padding: 10px 0;
+					border-top: 1px solid #2A2A2A;
+
+					&:last-child {
+						border-bottom: 1px solid #2A2A2A;
+
+					}
+				}
+			}
+
+			&__link {
+				font-family: 'Roboto';
+				font-style: normal;
+				font-weight: 400;
+				font-size: 16px;
+				line-height: 150%;
+				color: #FFFFFF;
+				font-stretch: 100;
+			}
+		}
+	}
+
+	&__social {
+		display: flex;
+
+		@include mr(20px);
+
+		.telegram,
+		.whatsapp {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 12px;
+			background: #00A19C;
+			border-radius: 4px;
+		}
+	}
 }
 
-.social-footer {
-    &__text {
-        margin-bottom: 16px;
-        font-family: "Lato";
-        font-style: normal;
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 24px;
-        color: #ffffff;
-    }
+.copy-footer {
+	display: flex;
+	justify-content: space-between;
 
-    &__items {
-        display: flex;
-        @include mr(20px);
-    }
+	@include sm-block() {
+		flex-direction: column;
+		@include mb(16px)
+	}
 
-    &__item {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 52px;
-        height: 52px;
-        background: #acada5;
-        border-radius: 16px;
-    }
+	&__text {
+		font-family: 'Roboto';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 12px;
+		line-height: 133%;
+		color: #6B6F6E;
+	}
+
+	&__left {}
+
+	&__right {
+		text-decoration-line: underline;
+	}
 }
 </style>

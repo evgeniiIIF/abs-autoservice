@@ -99,6 +99,11 @@ export default {
 	&__body {
 		display: flex;
 		padding: 60px 0 80px;
+
+		@include md-block() {
+			padding: 40px 0;
+			border-bottom: 1px solid #414141;
+		}
 	}
 
 	&__content {

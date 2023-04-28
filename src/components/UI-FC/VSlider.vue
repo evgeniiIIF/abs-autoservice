@@ -1,9 +1,9 @@
 <template>
 	<div ref="slider"
 			 class="slider"
-			 @touchstart="startSwipe"
-			 @touchmove="swipe"
-			 @touchend="endSwipe">
+			 @touchstart.passive="startSwipe"
+			 @touchmove.passive="swipe"
+			 @touchend.passive="endSwipe">
 		<div class="slider__body">
 			<div class="slider__top"
 					 v-if="sliderOpts.top">
@@ -22,7 +22,6 @@
 				</div>
 			</div>
 			<div class="slider__line"
-					 :class="md ? 'js-progress-container' : ''"
 					 :style="currentOffset">
 				<div ref="slide"
 						 class="slider__slide slide-slider"
@@ -41,7 +40,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="slider__progress progress-slider">
+			<div class="slider__progress progress-slider js-progress-slider">
 				<div class="progress-slider--desctop">
 					<div class="progress-slider__item"
 							 v-for="(item, index) in sliderOpts.slides.length"
@@ -50,9 +49,7 @@
 						<span class="progress-slider__item-active-line"></span>
 					</div>
 				</div>
-				<div class="progress-slider--mobile">
-					<VProgressBarX progressContainerSelector=".js-progress-container" />
-				</div>
+
 			</div>
 			<div class="slider__bottom"
 					 v-if="sliderOpts.bottom">
@@ -102,12 +99,17 @@ export default {
 		};
 	},
 	mounted() {
-		if (!this.slideWidth) {
-			this.setSlideWidth();
+
+		if (!this.md) {
+			if (!this.slideWidth) {
+				this.setSlideWidth();
+			}
+			window.addEventListener('resize', this.setSlideWidth());
 		}
-		window.addEventListener('resize', () => {
-			this.setSlideWidth();
-		});
+	},
+	unmounted() {
+
+		window.removeEventListener('resize', this.setSlideWidth());
 	},
 	methods: {
 		setSlideWidth() {
@@ -120,7 +122,7 @@ export default {
 				});
 			} else {
 				nextTick(() => {
-					if (element && this.$refs.slide) {
+					if (element && this.$refs.slide[0]) {
 						const marginRightSlide = parseInt(getComputedStyle(this.$refs.slide[0]).marginRight);
 						const elWidth = element[0].$el.clientWidth;
 						this.offsetWidthSlide = elWidth + marginRightSlide;
@@ -142,7 +144,6 @@ export default {
 			if (this.currentIndex > this.sliderOpts.slides.length - 1) {
 				this.currentIndex = 0;
 			}
-			console.log(this.currentIndex);
 		},
 		startSwipe(e) {
 			this.startTouchX = e.touches[0].clientX;
@@ -178,16 +179,27 @@ export default {
 		}
 	},
 
-	mounted() {
-		// if (!this.md) {
+	// mounted() {
+	// 	if (!this.md) {
+	// 		window.addEventListener('scroll', () => {
 
-		const intervalSlide = setInterval(() => {
-			console.log(this.currentIndex);
-			this.goToNextSlide()
-		}, 10000);
-	}
+	// 			const element = document.querySelector('.js-progress-slider');
+	// 			const progressItems = element.querySelectorAll('.progress-slider__item')
+
+	// 			const elementPosition = element.getBoundingClientRect().top;
+	// 			const scrollPosition = window.scrollY || window.pageYOffset;
+
+	// 			if (scrollPosition >= elementPosition) {
+	// 				console.log('scrolled');
+	// 				const intervalSlide = setInterval(() => {
+	// 					console.log(progressItems[this.currentIndex])
+	// 					this.goToNextSlide()
+	// 				}, 10000);
+	// 			}
+	// 		})
+	// 	}
+	// }
 }
-// };
 </script>
 
 <style lang="scss">
@@ -280,7 +292,7 @@ export default {
 	&--desctop {
 		display: flex;
 		justify-content: center;
-		@include mr(4px);
+		@include mr(20px);
 		margin-top: 32px;
 
 		@include md-block() {
@@ -289,11 +301,9 @@ export default {
 	}
 
 	&__item {
-		width: 23px;
+		width: 40px;
 		height: 2px;
 		background: #414141;
-
-
 
 		&--active {
 			& .progress-slider__item-active-line {

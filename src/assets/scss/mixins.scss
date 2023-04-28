@@ -1,7 +1,7 @@
-@use "sass:math";
+@use 'sass:math';
 
-@import "./vars.scss";
-@import "./smart-grid.scss";
+@import './vars.scss';
+@import './smart-grid.scss';
 
 // px to rem
 //font-size: rem(20);
@@ -37,13 +37,13 @@
 // @include adaptiv-font(40, 20)
 
 @mixin af($pcFontSize, $mobileFontSize) {
-    font-size: #{$pcFontSize + "px"};
+    font-size: #{$pcFontSize + 'px'};
 
     @include xl-block() {
-        font-size: #{$pcFontSize * 0.9 + "px"};
+        font-size: #{$pcFontSize * 0.9 + 'px'};
     }
     @include lg-block() {
-        font-size: #{$mobileFontSize + "px"};
+        font-size: #{$mobileFontSize + 'px'};
     }
     @include md-block() {
     }
@@ -100,5 +100,16 @@
 @mixin breakpoint($br) {
     @media (max-width: $br) {
         @content;
+    }
+}
+
+@mixin hideScroll() {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    & {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
     }
 }

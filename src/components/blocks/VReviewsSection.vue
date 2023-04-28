@@ -2,18 +2,36 @@
 	<section class="reviews">
 		<div class="container">
 			<div class="reviews__body">
-				<div class="reviews__slider">
+				<div class="reviews__slider"
+						 v-if="!md">
 					<VSlider :sliderOpts="sliderOpts" />
+				</div>
+				<div class="reviews__cards"
+						 v-else>
+					<div class="reviews__cards-line js-progress-container">
+
+						<div class="reviews__card"
+								 v-for="item in sliderOpts.slides">
+							<VCardRewievs :cardData="item.cardData" />
+						</div>
+					</div>
+					<div class="rewiews__cards-progress">
+						<VProgressBarX progressContainerSelector=".js-progress-container" />
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 </template>
 <script>
+import mobileMixin from "@/mixins/mobileMode";
 import VSlider from "../UI-FC/VSlider.vue"
+import VCardRewievs from "../cards/VCardRewievs.vue";
+import VProgressBarX from "../UI/VProgressBarX.vue";
 
 export default {
-	components: { VSlider },
+	components: { VSlider, VCardRewievs, VProgressBarX },
+	mixins: [mobileMixin],
 	data() {
 		return {
 			sliderOpts: {
@@ -89,7 +107,18 @@ export default {
 	}
 
 	&__slider {}
-}
 
-.container {}
+	&__cards {}
+
+	&__cards-line {
+		display: flex;
+		overflow-x: auto;
+		margin-bottom: 24px;
+
+		@include mr(20px);
+		@include hideScroll();
+	}
+
+	&__card {}
+}
 </style>
